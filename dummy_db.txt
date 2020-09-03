@@ -1,0 +1,33 @@
+CREATE TABLE users (
+  id int(10) UNSIGNED NOT NULL,
+  name varchar(191) NOT NULL,
+  username varchar(100) NOT NULL,
+  email varchar(191) NOT NULL,
+  password varchar(191) NOT NULL,
+  created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE posts (
+  id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  title varchar(255) NOT NULL,
+  slug varchar(255) NOT NULL,
+  description text CHARACTER SET utf8mb4,
+  created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+
+INSERT INTO users (id,name, username,	email,	password)
+VALUES	( 1001, 'julius',	'julius',	"julius@gmail.com",	'root');
+
+INSERT INTO posts (id, user_id, title, slug, description)
+VALUES (10, 1001, 'tes1', "tes1 slug", "isinya deskripsi tes1");
+
+SELECT posts.title, posts.slug, posts.description, posts.user_id FROM posts 
+LEFT JOIN users ON posts.user_id = users.id 
+UNION 
+SELECT posts.title, posts.slug, posts.description, posts.user_id FROM posts 
+RIGHT JOIN users ON posts.user_id = users.id 
+
